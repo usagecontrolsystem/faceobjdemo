@@ -1,0 +1,18 @@
+import subprocess 
+import sys
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--video', help='Run python3 run_detector.py --video [path_to_streming_video]')
+args = parser.parse_args(['video'])
+ 
+
+video_path = sys.argv[1]
+#http://146.48.99.48:8080/stream/video.mjpeg
+DETECTOR_COMMAND = ["sudo", "./darknet", "detector", "demo", "cfg/coco.data", "cfg/yolov3.cfg", "yolov3.weights", video_path]
+
+
+
+test = subprocess.Popen(DETECTOR_COMMAND, stdout=subprocess.PIPE)
+output = test.communicate()[0]
+
